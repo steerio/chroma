@@ -75,6 +75,12 @@ export const scales = [
     diatonic: 9
   },
   {
+    en: 'Ascending melodic minor',
+    hu: 'Emelkedő melodikus moll',
+    notes: [ 0, 2, 3, 5, 7, 9, 11 ],
+    diatonic: 9
+  },
+  {
     en: 'Locrian',
     hu: 'Lokriszi',
     notes: [ 0, 1, 3, 5, 6, 8, 10 ],
@@ -90,6 +96,18 @@ export const scales = [
     en: 'Blues scale',
     hu: 'Blues skála',
     notes: [ 0, 3, 5, 6, 7, 10 ],
+  },
+  {
+    en: 'Major pentatonic',
+    hu: 'Dúr pentaton',
+    notes: [ 0, 2, 4, 7, 9 ],
+    diatonic: 0
+  },
+  {
+    en: 'Minor pentatonic',
+    hu: 'Moll pentaton',
+    notes: [ 0, 3, 5, 7, 10 ],
+    diatonic: 9
   },
   {
     en: 'Major triad',

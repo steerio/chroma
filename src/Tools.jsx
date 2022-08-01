@@ -9,7 +9,7 @@ function getRootValue(sel) {
   return v == '' ? null : parseInt(v);
 }
 
-export const Tools = ({ state: { root, sel }, dispatch }) => (
+export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
   <div id="tools">
     <div class="buttons">
       <button type="button" onClick={() => dispatch('shift', 1)}>&lt; Shift</button>
@@ -35,6 +35,7 @@ export const Tools = ({ state: { root, sel }, dispatch }) => (
       <input
         id="tools-solfege"
         type="checkbox"
+        checked={solfege}
         onClick={e => e.target.blur()}
         onChange={e => dispatch('setSolfege', e.target.checked)}
       />

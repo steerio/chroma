@@ -3,7 +3,7 @@ import { useReducer, useCallback } from 'preact/hooks';
 const initialState = {
   sel: [],
   root: null,
-  solfege: false
+  solfege: true
 };
 
 function reducer(state, [op, arg]) {
