@@ -8,12 +8,12 @@ export const frequencies = [
 for (let i=0; i<12; i++) frequencies.push(frequencies[i]*2);
 
 export const solmization = [
-  'dó', 'di ra',
-  'ré', 'ri ma',
+  'do', 'di ra',
+  're', 'ri ma',
   'mi',
-  'fá', 'fi sza',
-  'szó', 'szi lu',
-  'lá', 'li tá',
+  'fa', 'fi se',
+  'sol', 'si lo',
+  'la', 'li ta',
   'ti'
 ];
 
