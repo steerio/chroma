@@ -1,0 +1,60 @@
+.scale {
+  h2 {
+    opacity: 0.4;
+  }
+  font-size: 11px;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  margin: 0 6px;
+  padding: 50px 6px;
+  gap: 12px;
+  border-left: dashed 1px rgba(0, 0, 0, 0.4);
+  border-right: dashed 1px rgba(0, 0, 0, 0.4);
+  &:first-child, &:last-child {
+    border: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    opacity: 0.5;
+  }
+  &:first-child {
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+  &:last-child {
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  }
+  &>div {
+    // One n0te
+    cursor: pointer;
+    div {
+      box-sizing: border-box;
+      width: 32px;
+      padding: 7px;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+    .note {
+      display: flex;
+      font-family: monospace;
+      width: 32px;
+      height: 48px;
+      background-color: black;
+      color: white;
+      margin: 0 0 40px 0;
+    }
+    &.selected>.note {
+      background-color: white;
+      color: black;
+      margin: 40px 0 0 0;
+    }
+    &>div:last-child {
+      margin-top: 10px;
+      height: 1.2em;
+      text-transform: uppercase;
+    }
+  }
+}
