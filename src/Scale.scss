@@ -19,12 +19,12 @@
     opacity: 0.5;
   }
   &:first-child {
-    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 90%);
+    -mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 90%);
   }
   &:last-child {
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 90%);
+    -mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 90%);
   }
   &>div {
     cursor: pointer;
