@@ -13,18 +13,21 @@ export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
 
   return (
     <div class="scale">
-      { chroma.map((selected, i) => (
-        <div
-          class={classes({ selected })}
-          onClick={() => dispatch(selected ? 'drop': 'add', i)}
-        >
-          <h2>{ i+1 }</h2>
-          <div class="note">{ root !== null && chromatic[(i+root) % 12] }</div>
-          <div>
-          { solfege && selected && isDia && solmization[(diatonic + i) % 12] }
-          </div>
-        </div>
-      )) }
+      { chroma.map((selected, i) => {
+          const note = (root !== null && chromatic[(i+root) % 12]);
+          return (
+            <div
+              class={classes({ selected, white: note && note.length == 1, black: note && note.length > 1 })}
+              onClick={() => dispatch(selected ? 'drop': 'add', i)}
+            >
+              <h2>{ i+1 }</h2>
+              <div class="note">{ note }</div>
+              <div>
+              { solfege && selected && isDia && solmization[(diatonic + i) % 12] }
+              </div>
+            </div>
+          );
+      }) }
     </div>
   );
 };
