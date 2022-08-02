@@ -49,7 +49,7 @@ export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
       <select onChange={e => dispatch('setRoot', getRootValue(e.target))}>
         <option value="" selected={root === null}>None</option>
         { chromatic.map((n, i) => (
-            <option value={i} selected={root == i}>{ n }</option>
+            <option value={i} selected={root == i}>{ n.join ? n.join(' / ') : n }</option>
           )) }
       </select>
     </div>
