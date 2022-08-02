@@ -40,8 +40,8 @@ export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
     </div>
 
     <div class="buttons">
-      <button type="button" onClick={() => dispatch('shiftRoot', 7)}>&lt; Root 5</button>
-      <button type="button" onClick={() => dispatch('shiftRoot', -7)}>Root 5 &gt;</button>
+      <button disabled={root === null} type="button" onClick={() => dispatch('shiftRoot', 7)}>&lt; Root 5</button>
+      <button disabled={root === null} type="button" onClick={() => dispatch('shiftRoot', -7)}>Root 5 &gt;</button>
     </div>
 
     <div>
@@ -66,8 +66,8 @@ export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
     </div>
 
     <div class="buttons">
-      <button type="button" onClick={() => playSeries(sel)}>Play</button>
-      <button type="button" onClick={() => playSeriesAddOct(sel)}>Play +1</button>
+      <button disabled={!sel.length} type="button" onClick={() => playSeries(sel)}>Play</button>
+      <button disabled={!sel.length} type="button" onClick={() => playSeriesAddOct(sel)}>Play +1</button>
       <button type="button" onClick={() => stop()}>Stop</button>
     </div>
   </div>
