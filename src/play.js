@@ -29,6 +29,6 @@ export function playSeries(ns) {
   if (rest.length) timeout = setTimeout(() => playSeries(rest), 200);
 }
 
-export function playSeriesReturn(ns) {
+export function playSeriesAddOct(ns) {
   playSeries([ ...ns, (ns[0] % 12) + 12 ]);
 }

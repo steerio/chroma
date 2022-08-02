@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import { major, minor, chromatic } from './data';
-import { playSeries, playSeriesReturn, stop } from './play';
+import { scales, chromatic } from './data';
+import { playSeries, playSeriesAddOct, stop } from './play';
 
 import "./Tools.scss";
 
@@ -9,17 +9,34 @@ function getRootValue(sel) {
   return v == '' ? null : parseInt(v);
 }
 
+export const Presets = ({ dispatch }) => {
+  const batches = [];
+  scales.forEach(i => {
+    if (i.batch !== undefined) (batches[i.batch] ||= []).push(i);
+  });
+
+  return (
+    <div class="presets">
+      <div class="buttons">
+        <button type="button" onClick={() => dispatch('clear')}>Clear</button>
+      </div>
+
+      { batches.map(batch => (
+        <div class="buttons">
+          { batch.map(i => (
+            <button type="button" onClick={() => dispatch('set', i.notes)}>{ i.label || i.en }</button>
+          )) }
+        </div>
+      )) }
+    </div>
+  );
+}
+
 export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
-  <div id="tools">
+  <div class="tools">
     <div class="buttons">
       <button type="button" onClick={() => dispatch('shift', 1)}>&lt; Shift</button>
       <button type="button" onClick={() => dispatch('shift', -1)}>Shift &gt;</button>
-    </div>
-
-    <div class="buttons">
-      <button type="button" onClick={() => dispatch('set', major)}>Maj</button>
-      <button type="button" onClick={() => dispatch('set', minor)}>Min</button>
-      <button type="button" onClick={() => dispatch('clear')}>Clear</button>
     </div>
 
     <div>
@@ -31,6 +48,7 @@ export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
           )) }
       </select>
     </div>
+
     <div>
       <input
         id="tools-solfege"
@@ -41,9 +59,10 @@ export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
       />
       <label for="tools-solfege">Solfeggio</label>
     </div>
+
     <div class="buttons">
       <button type="button" onClick={() => playSeries(sel)}>Play</button>
-      <button type="button" onClick={() => playSeriesReturn(sel)}>Play +1</button>
+      <button type="button" onClick={() => playSeriesAddOct(sel)}>Play +1</button>
       <button type="button" onClick={() => stop()}>Stop</button>
     </div>
   </div>

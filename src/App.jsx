@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { Scale } from './Scale';
 import { ScaleInfo } from './ScaleInfo';
-import { Tools } from './Tools';
+import { Presets, Tools } from './Tools';
 
 import { useAppReducer } from './reducer';
 import { scales } from './data';
@@ -13,13 +13,16 @@ export const App = () => {
   const [state, dispatch] = useAppReducer();
   const scale = scales.find(({ notes }) => arrEqual(notes, state.sel));
 
+  const rendered = <Scale state={state} scale={scale} dispatch={dispatch} />;
+
   return (
     <div>
       <Tools state={state} dispatch={dispatch} />
+      <Presets dispatch={dispatch} />
       <div id="octaves">
-        <Scale state={state} scale={scale} dispatch={dispatch} />
-        <Scale state={state} scale={scale} dispatch={dispatch} />
-        <Scale state={state} scale={scale} dispatch={dispatch} />
+        { rendered }
+        { rendered }
+        { rendered }
       </div>
       { scale && <ScaleInfo scale={scale} /> }
     </div>

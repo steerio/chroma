@@ -27,8 +27,9 @@
     mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   }
   &>div {
-    // One n0te
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
     div {
       box-sizing: border-box;
       width: 32px;
@@ -38,6 +39,7 @@
       font-weight: bold;
     }
     .note {
+      transition: 0.4s margin ease-out, 0.2s background-color ease-out, 0.2s color ease-out;
       display: flex;
       font-family: monospace;
       width: 32px;
