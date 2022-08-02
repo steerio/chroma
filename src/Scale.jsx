@@ -30,36 +30,41 @@ export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
         diatonic = scale?.diatonic,
         isDia = (diatonic !== undefined);
 
-  let sharps = new Set, flats = new Set,
-      sharpOk = true, flatOk = true;
+  let sharps, flats, sharpOk, flatOk;
+
+  if (notes) {
+    sharps = new Set;
+    flats = new Set;
+    sharpOk = flatOk = true;
+  }
 
   for (let i=0; i<sel.length; i++) {
     let idx = sel[i];
     chroma[idx] = true;
-    const n = notes[idx];
+    if (notes) {
+      const n = notes[idx];
 
-    if (n.pop) {
-      sharpOk = sharpFlat(sharpOk, sharps, n[0][0]);
-      flatOk  = sharpFlat(flatOk, flats, n[1][0]);
-    } else {
-      sharpOk = sharpFlat(sharpOk, sharps, n);
-      flatOk  = sharpFlat(flatOk, flats, n);
+      if (n.pop) {
+        sharpOk = sharpFlat(sharpOk, sharps, n[0][0]);
+        flatOk  = sharpFlat(flatOk, flats, n[1][0]);
+      } else {
+        sharpOk = sharpFlat(sharpOk, sharps, n);
+        flatOk  = sharpFlat(flatOk, flats, n);
+      }
     }
   }
-
-  console.log(sharpOk, flatOk);
 
   return (
     <div class="scale">
       { chroma.map((selected, i) => {
-          const note = notes[i];
+          const note = notes && notes[i];
           return (
             <div
               class={classes({ selected, white: note && note.length == 1, black: note && note.length > 1 })}
               onClick={() => dispatch(selected ? 'drop': 'add', i)}
             >
               <h2>{ i+1 }</h2>
-              <div class="note">{ renderNote(selected, note, sharpOk, flatOk) }</div>
+              <div class="note">{ note && renderNote(selected, note, sharpOk, flatOk) }</div>
               <div>
               { solfege && selected && isDia && solmization[(diatonic + i) % 12] }
               </div>
