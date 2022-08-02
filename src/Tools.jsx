@@ -35,8 +35,13 @@ export const Presets = ({ dispatch }) => {
 export const Tools = ({ state: { root, sel, solfege }, dispatch }) => (
   <div class="tools">
     <div class="buttons">
-      <button type="button" onClick={() => dispatch('shift', 1)}>&lt; Shift</button>
-      <button type="button" onClick={() => dispatch('shift', -1)}>Shift &gt;</button>
+      <button type="button" onClick={() => dispatch('shift', 1)}>&lt; ½</button>
+      <button type="button" onClick={() => dispatch('shift', -1)}>½ &gt;</button>
+    </div>
+
+    <div class="buttons">
+      <button type="button" onClick={() => dispatch('shiftRoot', 7)}>&lt; Root 5</button>
+      <button type="button" onClick={() => dispatch('shiftRoot', -7)}>Root 5 &gt;</button>
     </div>
 
     <div>

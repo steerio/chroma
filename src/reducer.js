@@ -27,6 +27,11 @@ function reducer(state, [op, arg]) {
         sel: sel.map(x => (x+arg+12) % 12).sort((a, b) => a-b),
         root: state.root == null ? null : (state.root - arg + 12) % 12
       };
+    case 'shiftRoot':
+      return {
+        ...state,
+        root: state.root == null ? null : (state.root - arg + 12) % 12
+      }
     case 'clear':
       return { ...state, sel: [] };
     case 'setRoot':
