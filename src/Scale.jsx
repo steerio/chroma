@@ -4,6 +4,21 @@ import classes from 'classnames';
 
 import "./Scale.scss";
 
+function noteName(note, chroma, selected, i) {
+  if (note.pop) {
+    if (selected) {
+      console.log(note, 'is selected');
+      const left = chroma[(i+11)%12], right = chroma[(i+1)%12];
+      if (left && right) return note.join(' ');
+      return note[right ? 0 : 1];
+    } else {
+      return note.join(' ');
+    }
+  } else {
+    return note;
+  }
+}
+
 export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
   const chroma = Array(12).fill(false),
         diatonic = scale?.diatonic,
@@ -21,7 +36,7 @@ export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
               onClick={() => dispatch(selected ? 'drop': 'add', i)}
             >
               <h2>{ i+1 }</h2>
-              <div class="note">{ note }</div>
+              <div class="note">{ noteName(note, chroma, selected, i) }</div>
               <div>
               { solfege && selected && isDia && solmization[(diatonic + i) % 12] }
               </div>
