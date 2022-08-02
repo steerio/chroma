@@ -70,6 +70,12 @@ export const scales = [
     batch: 0
   },
   {
+    en: 'Lydian dominant',
+    hu: 'Domináns líd',
+    notes: [ 0, 2, 4, 6, 7, 9, 10 ],
+    diatonic: 5
+  },
+  {
     en: 'Mixolydian',
     hu: 'Mixolíd',
     notes: [ 0, 2, 4, 5, 7, 9, 10 ],
