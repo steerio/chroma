@@ -2,7 +2,7 @@ import { useReducer, useCallback } from 'preact/hooks';
 
 const initialState = {
   sel: [],
-  root: null,
+  root: 0,
   solfege: true
 };
 
