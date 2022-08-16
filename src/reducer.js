@@ -1,4 +1,5 @@
 import { useReducer, useCallback } from 'preact/hooks';
+import { numSort } from './lib';
 
 const initialState = {
   sel: [],
@@ -24,7 +25,7 @@ function reducer(state, [op, arg]) {
     case 'shift':
       return {
         ...state,
-        sel: sel.map(x => (x+arg+12) % 12).sort((a, b) => a-b),
+        sel: sel.map(x => numSort(x+arg+12) % 12),
         root: state.root == null ? null : (state.root - arg + 12) % 12
       };
     case 'shiftRoot':

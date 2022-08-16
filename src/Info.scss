@@ -1,4 +1,4 @@
-.scale-info {
+.info {
   text-align: center;
   .kind {
     border-radius: 4px;
@@ -14,6 +14,9 @@
   }
   .kind-chord {
     background-color: #5a1f72;
+  }
+  .kind-interval {
+    background-color: #1f3872;
   }
   p {
     margin: 0;

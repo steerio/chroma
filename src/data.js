@@ -30,7 +30,7 @@ export const chromatic = [
 export const major = [ 0, 2, 4, 5, 7, 9, 11];
 export const minor = [ 0, 2, 3, 5, 7, 8, 10 ];
 
-export const scales = [
+export const patterns = [
   {
     en: 'Ionian (major)',
     hu: 'Ión (dúr)',
@@ -142,6 +142,31 @@ export const scales = [
     hu: 'Dúr hármashangzat',
     notes: [ 0, 4, 7 ],
     kind: 'chord',
+    movable: true,
+    diatonic: 0
+  },
+  {
+    en: 'Major 7th',
+    hu: 'Dúr szeptimakkord',
+    notes: [ 0, 4, 7, 11 ],
+    kind: 'chord',
+    movable: true,
+    diatonic: 0
+  },
+  {
+    en: 'Dominant 7th',
+    hu: 'Domináns szeptimakkord',
+    notes: [ 0, 4, 7, 10 ],
+    kind: 'chord',
+    movable: true,
+    diatonic: 0
+  },
+  {
+    en: 'Minor 7th',
+    hu: 'Moll szeptimakkord',
+    notes: [ 0, 3, 7, 10 ],
+    kind: 'chord',
+    movable: true,
     diatonic: 0
   },
   {
@@ -149,6 +174,7 @@ export const scales = [
     hu: 'Moll hármashangzat',
     notes: [ 0, 3, 7 ],
     kind: 'chord',
+    movable: true,
     diatonic: 9
   },
   {
@@ -156,6 +182,14 @@ export const scales = [
     hu: 'Szűkített hármashangzat',
     notes: [ 0, 3, 6 ],
     kind: 'chord',
+    movable: true,
     diatonic: 11
+  },
+  {
+    en: 'Tritone',
+    hu: 'Tritónusz',
+    notes: [ 0, 6 ],
+    kind: 'interval',
+    movable: true
   },
 ];

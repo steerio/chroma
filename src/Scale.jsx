@@ -24,10 +24,10 @@ function renderNote(sel, n, sharpOk, flatOk) {
   }
 }
 
-export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
+export const Scale = ({ state: { sel, root, solfege }, pattern, patternRoot, dispatch }) => {
   const chroma = Array(12).fill(false),
         notes = root !== null ? [ ...chromatic.slice(root), ...chromatic.slice(0, root) ] : null,
-        diatonic = scale?.diatonic,
+        diatonic = pattern?.diatonic,
         isDia = (diatonic !== undefined);
 
   let sharps, flats, sharpOk, flatOk;
@@ -44,7 +44,7 @@ export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
     if (notes) {
       const n = notes[idx];
 
-      if (n.pop) {
+      if (n.constructor === Array) {
         sharpOk = sharpFlat(sharpOk, sharps, n[0][0]);
         flatOk  = sharpFlat(flatOk, flats, n[1][0]);
       } else {
@@ -64,9 +64,11 @@ export const Scale = ({ state: { sel, root, solfege }, scale, dispatch }) => {
               onClick={() => dispatch(selected ? 'drop': 'add', i)}
             >
               <h2>{ i+1 }</h2>
-              <div class="note">{ note && renderNote(selected, note, sharpOk, flatOk) }</div>
+              <div class={classes('note', { 'root': patternRoot == i })}>
+                { note && renderNote(selected, note, sharpOk, flatOk) }
+              </div>
               <div>
-              { solfege && selected && isDia && solmization[(diatonic + i) % 12] }
+              { solfege && selected && isDia && solmization[(12 - patternRoot + diatonic + i) % 12] }
               </div>
             </div>
           );

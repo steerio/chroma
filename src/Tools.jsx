@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { scales, chromatic } from './data';
+import { patterns, chromatic } from './data';
 import { playSeries, playSeriesAddOct, stop } from './play';
 
 import "./Tools.scss";
@@ -11,7 +11,7 @@ function getRootValue(sel) {
 
 export const Presets = ({ dispatch }) => {
   const batches = [];
-  scales.forEach(i => {
+  patterns.forEach(i => {
     if (i.batch !== undefined) (batches[i.batch] ||= []).push(i);
   });
 
