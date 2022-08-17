@@ -159,7 +159,7 @@ export const patterns = [
     notes: [ 0, 4, 7, 10 ],
     kind: 'chord',
     movable: true,
-    diatonic: 0
+    diatonic: 7
   },
   {
     en: 'Minor 7th',

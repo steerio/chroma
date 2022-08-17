@@ -44,7 +44,7 @@ export const Scale = ({ state: { sel, root, solfege }, pattern, patternRoot, dis
     if (notes) {
       const n = notes[idx];
 
-      if (n.constructor === Array) {
+      if (n.pop) {
         sharpOk = sharpFlat(sharpOk, sharps, n[0][0]);
         flatOk  = sharpFlat(flatOk, flats, n[1][0]);
       } else {

@@ -34,8 +34,6 @@ export const App = () => {
     [ state.sel ]
   );
 
-  console.log(pattern, root);
-
   const rendered = (
     <Scale
       state={state}
