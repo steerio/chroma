@@ -12,4 +12,8 @@ export class CustomScale extends Scale {
     const notes = root ? sel.map(i => i-root) : sel;
     return arrEqual(notes, this.notes) && this;
   }
+
+  generate(root) {
+    return this.notes.map(i => i+root);
+  }
 }

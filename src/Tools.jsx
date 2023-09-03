@@ -1,15 +1,11 @@
 import { h } from 'preact';
-import { chromatic, roots } from './data';
-import { DiatonicScale } from './patterns';
+import { diatonicScales, importantScales, chromatic, roots } from './data';
+import { Scale, DiatonicScale } from './patterns';
 import { playSeries, playSeriesAddOct, stop } from './play';
 
 import "./Tools.scss";
 
 const rootMenu = roots.map((n, i) => [ n, chromatic[i] ]);
-
-const diaScales = DiatonicScale.names.map((m, i) => [ i, m]);
-diaScales.splice(5, 1);
-diaScales.splice(0, 1, [ 0, 'Maj' ], [ 5, 'Min' ]);
 
 function getRootValue(sel) {
   const v = sel.options[sel.selectedIndex].value;
@@ -29,22 +25,31 @@ export const Presets = ({ dispatch, root }) => {
       </div>
 
       <div class="buttons">
-        { diaScales.map(([index, label]) => (
+        { diatonicScales.map(([index, label]) => (
           <button
             type="button"
             onClick={() => dispatch('set', DiatonicScale.generate(index, root))}
           >{ label }</button>
         )) }
       </div>
+
+      <div class="buttons">
+        { importantScales.map(({ label, scale }) => (
+          <button
+            type="button"
+            onClick={() => dispatch('set', scale.generate(root))}
+          >{ label }</button>
+        ))}
+      </div>
     </div>
   );
 }
 
-export const Tools = ({ state: { root, sel, solfege, carry }, pattern, dispatch }) => {
+export const Tools = ({ state: { root, sel, solfege, carry, follow }, pattern, dispatch }) => {
   let shift = 'shiftRoot', set = 'setRoot';
-  if (sel.length == 7 && contained(root, sel)) {
-    shift += 'Dia';
-    set += 'Dia'
+  if (follow || pattern instanceof Scale) {
+    shift += 'Follow';
+    set += 'Follow';
   }
 
   return (

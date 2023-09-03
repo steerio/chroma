@@ -7,6 +7,7 @@ const initialState = {
   root: 0,
   solfege: true,
   carry: false,
+  follow: false,
   patterns: []
 };
 
@@ -14,7 +15,7 @@ function shiftRoot(root, delta) {
   return roots[(roots.indexOf(root) - delta + 12) % 12]
 }
 
-function setRootDia(state, root) {
+function setRootFollow(state, root) {
   let sel;
   if (state.carry) {
     const delta = root - state.root;
@@ -24,7 +25,7 @@ function setRootDia(state, root) {
     sel = numSort(state.sel.map(i => (i < root || i > tail) ? root+(modulo(i-root, 12)) : i));
   }
 
-  return { ...state, root, sel };
+  return { ...state, root, sel, follow: true };
 }
 
 function reducer(state, [op, arg]) {
@@ -35,31 +36,44 @@ function reducer(state, [op, arg]) {
       pos = sel.findIndex(i => i >= arg);
       if (pos == -1) return { ...state, sel: [ ...sel, arg] };
       if (sel[pos] == arg) return state;
-      return { ...state, sel: [ ...sel.slice(0, pos), arg, ...sel.slice(pos) ]};
+      return {
+        ...state,
+        sel: [ ...sel.slice(0, pos), arg, ...sel.slice(pos) ],
+        follow: false
+      };
     case 'drop':
       pos = sel.findIndex(i => i == arg);
       if (pos == -1) return state;
-      return { ...state, sel: [ ...sel.slice(0, pos), ...sel.slice(pos+1) ]};
+      return {
+        ...state,
+        sel: [ ...sel.slice(0, pos), ...sel.slice(pos+1) ],
+        follow: false
+      };
     case 'set':
-      return { ...state, sel: arg };
+      return {
+        ...state,
+        sel: arg,
+        follow: false
+      };
     case 'shift':
       if (!sel.length) return state;
       return {
         ...state,
-        sel: numSort(sel.map(x => x-arg))
+        sel: numSort(sel.map(x => x-arg)),
+        follow: false
       };
     case 'shiftRoot':
       return state.root === null ? state : { ...state, root: shiftRoot(state.root, arg) };
-    case 'shiftRootDia':
+    case 'shiftRootFollow':
       const { root } = state;
       if (root === null) return state;
-      return setRootDia(state, shiftRoot(root, arg));
+      return setRootFollow(state, shiftRoot(root, arg));
     case 'clear':
-      return { ...state, sel: [] };
+      return { ...state, sel: [], follow: false };
     case 'setRoot':
       return { ...state, root: arg };
-    case 'setRootDia':
-      return setRootDia(state, arg);
+    case 'setRootFollow':
+      return setRootFollow(state, arg);
     case 'setSolfege':
       return { ...state, solfege: arg };
     case 'setCarry':
