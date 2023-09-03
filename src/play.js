@@ -1,15 +1,23 @@
 import { frequencies } from './data';
+import { modulo } from './lib';
 
 let timeout = null;
 const ctx = new AudioContext;
 
+function frequency(n) {
+  const freq = frequencies[n];
+  if (freq) return freq;
+  return frequencies[modulo(n, 12)] * Math.pow(2, Math.floor(n/12));
+}
+
 export function playOne(n) {
+  console.log(n, frequency(n));
   stop();
   const o = ctx.createOscillator(),
         g = ctx.createGain();
   o.type = 'sine';
   o.connect(g);
-  o.frequency.value = frequencies[n];
+  o.frequency.value = frequency(n);
   g.connect(ctx.destination);
   o.start(0);
   g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 2);
