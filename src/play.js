@@ -11,7 +11,6 @@ function frequency(n) {
 }
 
 export function playOne(n) {
-  console.log(n, frequency(n));
   stop();
   const o = ctx.createOscillator(),
         g = ctx.createGain();

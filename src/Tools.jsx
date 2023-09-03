@@ -16,6 +16,11 @@ function getRootValue(sel) {
   return v == '' ? null : parseInt(v);
 }
 
+function contained(root, sel) {
+  const tail = root+11;
+  return sel.every(i => i >= root && i <= tail);
+}
+
 export const Presets = ({ dispatch, root }) => {
   return (
     <div class="presets">
@@ -35,14 +40,11 @@ export const Presets = ({ dispatch, root }) => {
   );
 }
 
-export const Tools = ({ state: { root, sel, solfege }, pattern, dispatch }) => {
-  let shift, set;
-  if (pattern?.diatonic) {
-    shift = 'shiftAll';
-    set = 'moveRoot';
-  } else {
-    shift = 'shiftRoot';
-    set = 'setRoot';
+export const Tools = ({ state: { root, sel, solfege, carry }, pattern, dispatch }) => {
+  let shift = 'shiftRoot', set = 'setRoot';
+  if (sel.length == 7 && contained(root, sel)) {
+    shift += 'Dia';
+    set += 'Dia'
   }
 
   return (
@@ -68,6 +70,14 @@ export const Tools = ({ state: { root, sel, solfege }, pattern, dispatch }) => {
       </div>
 
       <div>
+        <input
+          id="tools-carry"
+          type="checkbox"
+          checked={carry}
+          onClick={e => e.target.blur()}
+          onChange={e => dispatch('setCarry', e.target.checked)}
+        />
+        <label for="tools-carry">Carry scale</label>
         <input
           id="tools-solfege"
           type="checkbox"

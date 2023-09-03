@@ -66,9 +66,5 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
     }
   }
 
-  const accidentals = (root !== null && pattern?.diatonic) ?
-    selectAccidentals(sel, root) :
-    null;
-
-  return <ul class={classes("keyboard", accidentals)}>{ keys }</ul>;
+  return <ul class={classes("keyboard", selectAccidentals(sel, root))}>{ keys }</ul>;
 };

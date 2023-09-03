@@ -37,8 +37,8 @@ export const matchers = [
   new CustomScale('Lydian dominant', 3, [ 0, 2, 4, 6, 7, 9, 10 ]),
   new CustomScale('Harmonic minor', 6, [ 0, 2, 3, 5, 7, 8, 11 ]),
   new CustomScale('Ascending melodic minor', 6, [ 0, 2, 3, 5, 7, 9, 11 ]),
-  new CustomScale('Whole tone', null, [ 0, 2, 4, 6, 8, 10]),
-  new CustomScale('Blues', 6, [ 0, 3, 5, 6, 7, 10 ]),
+  new CustomScale('Whole tone scale', null, [ 0, 2, 4, 6, 8, 10]),
+  new CustomScale('Blues scale', 6, [ 0, 3, 5, 6, 7, 10 ]),
   new CustomScale('Major pentatonic', 0, [ 0, 2, 4, 7, 9 ]),
   new CustomScale('Minor pentatonic', 6, [ 0, 3, 5, 7, 10 ])
 ];
