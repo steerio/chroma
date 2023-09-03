@@ -24,3 +24,7 @@ export function findPattern(a, b, mod=12) {
   }
   return -1;
 }
+
+export function modulo(a, n) {
+  return ((a % n) + n) % n;
+} 

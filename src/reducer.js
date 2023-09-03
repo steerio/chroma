@@ -1,15 +1,21 @@
 import { useReducer, useCallback } from 'preact/hooks';
 import { numSort } from './lib';
+import { roots } from './data';
 
 const initialState = {
   sel: [],
   root: 0,
-  solfege: true
+  solfege: true,
+  patterns: []
 };
+
+function shiftRoot(root, delta) {
+  return roots[(roots.indexOf(root) - delta + 12) % 12]
+}
 
 function reducer(state, [op, arg]) {
   const { sel } = state;
-  let pos;
+  let delta, pos;
   switch (op) {
     case 'add':
       pos = sel.findIndex(i => i >= arg);
@@ -23,20 +29,29 @@ function reducer(state, [op, arg]) {
     case 'set':
       return { ...state, sel: arg };
     case 'shift':
+      if (!sel.length) return state;
       return {
         ...state,
-        sel: numSort(sel.map(x => (x+arg+12) % 12)),
-        root: state.root == null ? null : (state.root - arg + 12) % 12
+        sel: numSort(sel.map(x => x-arg))
       };
     case 'shiftRoot':
+      return state.root === null ? state : { ...state, root: shiftRoot(state.root, arg) };
+    case 'shiftAll':
+      if (state.root === null) return state;
+      const root = shiftRoot(state.root, arg);
+      delta = root - state.root;
       return {
         ...state,
-        root: state.root == null ? null : (state.root - arg + 12) % 12
-      }
+        root,
+        sel: sel.map(i => i + delta)
+      };
     case 'clear':
       return { ...state, sel: [] };
     case 'setRoot':
       return { ...state, root: arg };
+    case 'moveRoot':
+      delta = arg - state.root;
+      return { ...state, root: arg, sel: sel.map(i => i + delta) };
     case 'setSolfege':
       return { ...state, solfege: arg };
   }

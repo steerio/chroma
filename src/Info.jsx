@@ -3,13 +3,14 @@ import classes from 'classnames';
 
 import './Info.scss';
 
-export const Info = ({ pattern }) => {
-  const kind = pattern.kind || 'scale';
-  return (
-    <div class="info">
-      <div class={classes('kind', `kind-${kind}`)}>{ kind }</div>
-      <p>{ pattern.en }</p>
-      <p>{ pattern.hu }</p>
-    </div>
-  );
+export const Info = ({ patterns }) => {
+  const pattern = patterns?.[0];
+  if (pattern) {
+    return (
+      <div class="info">
+        <div class={classes('kind', `kind-${pattern.kind}`)}>{ pattern.label }</div>
+        <p>{ pattern.name }</p>
+      </div>
+    );
+  }
 };
