@@ -28,3 +28,7 @@ export function findPattern(a, b, mod=12) {
 export function modulo(a, n) {
   return ((a % n) + n) % n;
 } 
+
+export function hasDupes(a) {
+  return new Set(a).size != a.length;
+}

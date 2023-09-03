@@ -7,8 +7,6 @@ export const frequencies = [
   466.2, 493.9
 ];
 
-for (let i=0; i<12; i++) frequencies.push(frequencies[i]*2);
-
 export const solmization = [
   'do', ['di', 'ra'],
   're', ['ri', 'ma'],

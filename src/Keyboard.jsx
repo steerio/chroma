@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { modulo } from './lib';
+import { modulo, hasDupes } from './lib';
 import { chromatic } from './data';
 import classes from 'classnames';
 
@@ -8,34 +8,15 @@ import "./Keyboard.scss";
 
 // Figuring out the accidentals {{{
 
-function sharpFlat(ok, set, note) {
-  if (ok) {
-    if (set.has(note)) return false;
-    set.add(note);
-    return true;
-  } else return false;
-}
+const sharps = chromatic.map(i => (i.pop ? i[0] : i)[0]),
+      flats  = chromatic.map(i => (i.pop ? i[1] : i)[0]);
 
-function selectAccidentals(sel, absRoot) {
-  const root = modulo(absRoot, 12),
-        notes = [ ...chromatic.slice(root), ...chromatic.slice(0, root) ],
-        sharps = new Set,
-        flats = new Set;
-  let sharpOk = true, flatOk = true;
+function selectAccidentals(absSel) {
+  const sel = [...new Set(absSel.map(i => modulo(i, 12)))],
+        sharpOk = !hasDupes(sel.map(i => sharps[i])),
+        flatsOk = !hasDupes(sel.map(i => flats[i]));
 
-  for (let i=0; i<sel.length; i++) {
-    const n = notes[modulo(sel[i], 12)];
-
-    if (n.pop) {
-      sharpOk = sharpFlat(sharpOk, sharps, n[0][0]);
-      flatOk  = sharpFlat(flatOk, flats, n[1][0]);
-    } else {
-      sharpOk = sharpFlat(sharpOk, sharps, n);
-      flatOk  = sharpFlat(flatOk, flats, n);
-    }
-  }
-
-  if (sharpOk == flatOk) return null;
+  if (sharpOk == flatsOk) return null;
   return sharpOk ? 'sharps' : 'flats';
 }
 
