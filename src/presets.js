@@ -28,6 +28,10 @@ export const importantScales = [
   {
     label: 'Min5',
     scale: new CustomScale('Minor pentatonic', 9, [ 0, 3, 5, 7, 10 ])
+  },
+  {
+    label: 'Alt',
+    scale: new CustomScale('Altered dominant', 7, [ 0, 1, 3, 4, 6, 8, 10 ])
   }
 ];
 
@@ -36,5 +40,5 @@ export const matchers = [
   DiatonicScale,
   Chord,
   ...importantScales.map(i => i.scale),
-  new CustomScale('Lydian dominant', 3, [ 0, 2, 4, 6, 7, 9, 10 ])
+  new CustomScale('Lydian dominant', 5, [ 0, 2, 4, 6, 7, 9, 10 ])
 ];
