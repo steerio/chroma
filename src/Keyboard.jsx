@@ -23,7 +23,7 @@ function selectAccidentals(absSel) {
 // }}}
 
 export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, dispatch }) => {
-  const keys = [];
+  const keys = [], hasRoot = root !== null;
   let cidx;
   let gidx = -12; // TODO
 
@@ -35,7 +35,7 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
             selected = sel.indexOf(idx) > -1,
             htmlClasses = {
               selected,
-              scale:  root !== null && idx >= root && idx < root+12
+              scale: hasRoot && idx >= root && idx < root+12
             };
 
       let mainClass, key, content;
@@ -53,8 +53,8 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
       }
 
       let sol =
-        solfege && selected && pattern?.diatonicRoot !== undefined &&
-        solmization[modulo(pattern.diatonicRoot + chroma, 12)];
+        solfege && hasRoot && selected && pattern?.diatonicRoot !== undefined &&
+        solmization[modulo(pattern.diatonicRoot - root + chroma, 12)];
 
       if (sol.pop) sol = sol.map(i => <span>{ i }</span>);
 
