@@ -18,12 +18,12 @@ export const solmization = [
 ];
 
 export const chromatic = [
-  'C', ['C#', 'Db'],
-  'D', ['D#', 'Eb'],
+  'C', ['C♯', 'D♭'],
+  'D', ['D♯', 'E♭'],
   'E',
-  'F', ['F#', 'Gb'],
-  'G', ['G#', 'Ab'],
-  'A', ['A#', 'Bb'],
+  'F', ['F♯', 'G♭'],
+  'G', ['G♯', 'A♭'],
+  'A', ['A♯', 'B♭'],
   'B'
 ];
 
@@ -37,15 +37,15 @@ diatonicScales.splice(0, 1, [ 0, 'Maj' ], [ 5, 'Min' ]);
 export const importantScales = [
   {
     label: 'Harm. minor',
-    scale: new CustomScale('Harmonic minor', 6, [ 0, 2, 3, 5, 7, 8, 11 ])
+    scale: new CustomScale('Harmonic minor', 9, [ 0, 2, 3, 5, 7, 8, 11 ])
   },
   {
     label: 'Asc. mel. minor',
-    scale: new CustomScale('Ascending melodic minor', 6, [ 0, 2, 3, 5, 7, 9, 11 ])
+    scale: new CustomScale('Ascending melodic minor', 9, [ 0, 2, 3, 5, 7, 9, 11 ])
   },
   {
     label: 'Blues',
-    scale: new CustomScale('Blues scale', 6, [ 0, 3, 5, 6, 7, 10 ])
+    scale: new CustomScale('Blues scale', 9, [ 0, 3, 5, 6, 7, 10 ])
   },
   {
     label: 'Whole',
@@ -57,7 +57,7 @@ export const importantScales = [
   },
   {
     label: 'Min5',
-    scale: new CustomScale('Minor pentatonic', 6, [ 0, 3, 5, 7, 10 ])
+    scale: new CustomScale('Minor pentatonic', 9, [ 0, 3, 5, 7, 10 ])
   }
 ];
 

@@ -7,20 +7,20 @@ ul.keyboard {
     display: none;
   }
   li {
-    font-family: monospace;
     text-align: center;
     padding: 2em 0.2em;
     padding-bottom: 1em;
     &.scale {
       background-color: rgba(0, 0, 0, 0.1);
     }
-    &, .key {
+    &, .key, .misc {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
     }
     .key {
+      font-family: monospace;
       opacity: 0.2;
       border-radius: 4px;
       padding: 0.2em 0;
@@ -50,6 +50,13 @@ ul.keyboard {
     }
     span {
       display: block;
+    }
+    .misc {
+      margin-top: 1em;
+      font-size: 0.8em;
+      height: 3em;
+      text-transform: uppercase;
+      opacity: 0.4;
     }
   }
 }

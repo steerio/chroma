@@ -1,7 +1,9 @@
 import { Scale } from "./Scale";
 import { arrEqual } from '../lib';
 
-const scales = [[ 0, 2, 4, 5, 7, 9, 11]];
+const major = [ 0, 2, 4, 5, 7, 9, 11 ];
+
+const scales = [ major ];
 for (let i=0; i<6; i++) {
   const notes = scales[i],
         r = notes[1];
@@ -12,7 +14,7 @@ export class DiatonicScale extends Scale {
   exactKind = 'Diatonic Scale';
 
   constructor(index) {
-    super(DiatonicScale.names[index], index);
+    super(DiatonicScale.names[index], major[index]);
   }
 
   get diatonic() {
