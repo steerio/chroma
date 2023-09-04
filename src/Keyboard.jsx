@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 
 import { modulo, hasDupes } from './lib';
-import { chromatic, chromaticFSharp, solmization } from './data';
+import { major, chromatic, chromaticOpposite, solmization } from './data';
 import classes from 'classnames';
 import "./Keyboard.scss";
 
@@ -27,10 +27,8 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
 
   let accidentals = selectAccidentals(sel, root),
       chroma = chromatic;
-  if (hasRoot && pattern?.isOppositeC && pattern.isOppositeC(root)) {
-    chroma = chromaticFSharp,
-    accidentals = 'sharps';
-  }
+  if (hasRoot && pattern?.isOppositeC && pattern.isOppositeC(root))
+    chroma = chromaticOpposite;
 
   for (let oct=1; oct<=octaves; oct++) {
     gcidx = 0;
@@ -43,20 +41,6 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
               scale: hasRoot && idx >= root && idx < root+12
             };
 
-      let mainClass, key, content;
-      if (!note.pop) {
-        mainClass = note == 'E#' ? 'grey' : 'white';
-        key = `${note}-${oct}`;
-        content = note;
-      } else {
-        mainClass = 'black';
-        key = `${note}${oct}`;
-        content = <>
-          <span class="sharp">{ note[0] }</span>
-          <span class="flat">{ note[1] }</span>
-        </>;
-      }
-
       let sol =
         solfege && hasRoot && selected && pattern?.diatonic &&
         solmization[modulo(pattern.diatonicRoot - root + cidx, 12)];
@@ -65,12 +49,20 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
 
       keys.push(
         <li
-          key={key}
-          class={classes(mainClass, htmlClasses)}
+          key={idx}
+          class={classes(major.indexOf(cidx) > -1 ? 'white' : 'black', htmlClasses)}
           data-idx={idx}
           onClick={() => dispatch(selected ? 'drop' : 'add', idx)}
         >
-          <div class="key">{ content }</div>
+          <div class="key">
+            { note.pop ?
+              <>
+                <span class="sharp">{ note[0] }</span>
+                <span class="flat">{ note[1] }</span>
+              </> :
+              note
+            }
+          </div>
           <div class="misc">
             { sol }
           </div>

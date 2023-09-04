@@ -1,5 +1,6 @@
 import { h } from 'preact';
-import { diatonicScales, importantScales, chromatic, roots } from './data';
+import { chromatic, roots } from './data';
+import { diatonicScales, importantScales } from './presets';
 import { Scale, DiatonicScale } from './patterns';
 import { playSeries, playSeriesAddOct, stop } from './play';
 

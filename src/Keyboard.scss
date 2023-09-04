@@ -36,24 +36,17 @@ ul.keyboard {
       border-color: #d85 !important;
       box-shadow: 0px 0px 8px -1px #d85;
     }
-    &.white .key, &.grey .key {
-      border-color: white;
-      margin-top: 30px;
-    }
     &.white .key {
+      margin-top: 30px;
       background-color: white;
       color: black;
-    }
-    &.grey .key {
-      background-color: #ccc;
-    }
-    &.black .key, &.grey .key {
-      background-color: black;
-      border-color: black;
-      color: white;
+      border-color: white;
     }
     &.black .key {
       margin-bottom: 30px;
+      background-color: black;
+      color: white;
+      border-color: black;
     }
     span {
       display: block;

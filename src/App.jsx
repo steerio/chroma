@@ -6,7 +6,7 @@ import { Info } from './Info';
 import { Presets, Tools } from './Tools';
 
 import { useAppReducer } from './reducer';
-import { matchers } from './data';
+import { matchers } from './presets';
 import { arrEqual, findPattern } from './lib';
 
 import "./App.scss";

@@ -1,7 +1,6 @@
 import { Scale } from "./Scale";
+import { major } from '../data';
 import { modulo, arrEqual } from '../lib';
-
-const major = [ 0, 2, 4, 5, 7, 9, 11 ];
 
 const scales = [ major ];
 for (let i=0; i<6; i++) {
