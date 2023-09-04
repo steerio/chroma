@@ -18,17 +18,23 @@ function contained(root, sel) {
   return sel.every(i => i >= root && i <= tail);
 }
 
-export const Presets = ({ dispatch, root }) => {
+export const Presets = ({ dispatch, root, sel }) => {
+  const noRoot = root === null;
   return (
     <div class="presets">
       <div class="buttons">
-        <button type="button" onClick={() => dispatch('clear')}>Clear</button>
+        <button
+          type="button"
+          disabled={!sel.length}
+          onClick={() => dispatch('clear')}
+        >Clear</button>
       </div>
 
       <div class="buttons">
         { diatonicScales.map(([index, label]) => (
           <button
             type="button"
+            disabled={noRoot}
             onClick={() => dispatch('set', DiatonicScale.generate(index, root))}
           >{ label }</button>
         )) }
@@ -38,6 +44,7 @@ export const Presets = ({ dispatch, root }) => {
         { importantScales.map(({ label, scale }) => (
           <button
             type="button"
+            disabled={noRoot}
             onClick={() => dispatch('set', scale.generate(root))}
           >{ label }</button>
         ))}
@@ -47,6 +54,9 @@ export const Presets = ({ dispatch, root }) => {
 }
 
 export const Tools = ({ state: { root, sel, solfege, carry, follow }, pattern, dispatch }) => {
+  const noRoot = root === null,
+        noNotes = !sel.length;
+
   let shift = 'shiftRoot', set = 'setRoot';
   if (follow || pattern instanceof Scale) {
     shift += 'Follow';
@@ -56,19 +66,27 @@ export const Tools = ({ state: { root, sel, solfege, carry, follow }, pattern, d
   return (
     <div class="tools">
       <div class="buttons">
-        <button type="button" onClick={() => dispatch('shift', 1)}>&lt; ½</button>
-        <button type="button" onClick={() => dispatch('shift', -1)}>½ &gt;</button>
+        <button
+          type="button"
+          disabled={noNotes}
+          onClick={() => dispatch('shift', 1)}
+        >&#9204; ½</button>
+        <button
+          type="button"
+          disabled={noNotes}
+          onClick={() => dispatch('shift', -1)}
+        >½ &#9205;</button>
       </div>
 
       <div class="buttons">
-        <button disabled={root === null} type="button" onClick={() => dispatch(shift, 7)}>&lt; Root 5</button>
-        <button disabled={root === null} type="button" onClick={() => dispatch(shift, -7)}>Root 5 &gt;</button>
+        <button disabled={noRoot} type="button" onClick={() => dispatch(shift, 7)}>&#9204; Root 5</button>
+        <button disabled={noRoot} type="button" onClick={() => dispatch(shift, -7)}>Root 5 &#9205;</button>
       </div>
 
       <div>
         <label>Root:</label>
         <select onChange={e => dispatch(set, getRootValue(e.target))}>
-          <option value="" selected={root === null}>None</option>
+          <option value="" selected={noRoot}>None</option>
           { rootMenu.map(([n, name]) => (
               <option value={n} selected={root == n}>{ name.join ? name.join(' / ') : name }</option>
             )) }

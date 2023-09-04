@@ -37,7 +37,11 @@ export const App = () => {
         pattern={pattern}
         dispatch={dispatch}
       />
-      <Presets root={state.root} dispatch={dispatch} />
+      <Presets
+        root={state.root}
+        sel={state.sel}
+        dispatch={dispatch}
+      />
       <div class="octaves">
         <Keyboard
           state={state}
