@@ -21,7 +21,10 @@ function selectAccidentals(absSel) {
 
 // }}}
 
-export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, dispatch }) => {
+export const Keyboard = ({
+  state: { sel, root, solfege },
+  pattern, octaves=3, dispatch
+}) => {
   const keys = [], hasRoot = root !== null,
         accidentals = selectAccidentals(sel, root),
         chroma = (hasRoot && pattern?.isOppositeC?.(root)) ? chromaticOpposite : chromatic,
@@ -41,11 +44,12 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
               'scale--last': idx == root+11
             };
 
-      let label;
+      let label, labelIsSol = false;
       if (labels) {
         if (selected) label = labels[gsidx++];
       } else if (solfege && hasRoot && selected && pattern?.diatonic) {
         label = solmization[modulo(pattern.diatonicRoot - root + cidx, 12)];
+        labelIsSol = true;
       }
 
       if (label?.pop) label = label.map(i => <span>{ i }</span>);
@@ -66,7 +70,7 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
               note
             }
           </div>
-          <div class="misc">
+          <div class={classes('label', { 'label--solfeggio': labelIsSol })}>
             { label }
           </div>
         </li>

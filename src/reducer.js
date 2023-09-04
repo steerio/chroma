@@ -8,7 +8,7 @@ const initialState = {
   solfege: true,
   carry: false,
   follow: false,
-  patterns: []
+  selPat: 0
 };
 
 function shiftRoot(root, delta) {
@@ -39,7 +39,8 @@ function reducer(state, [op, arg]) {
       return {
         ...state,
         sel: [ ...sel.slice(0, pos), arg, ...sel.slice(pos) ],
-        follow: false
+        follow: false,
+        selPat: 0
       };
     case 'drop':
       pos = sel.findIndex(i => i == arg);
@@ -47,13 +48,15 @@ function reducer(state, [op, arg]) {
       return {
         ...state,
         sel: [ ...sel.slice(0, pos), ...sel.slice(pos+1) ],
-        follow: false
+        follow: false,
+        selPat: 0
       };
     case 'set':
       return {
         ...state,
         sel: arg,
-        follow: false
+        follow: false,
+        selPat: 0
       };
     case 'shift':
       if (!sel.length) return state;
@@ -78,6 +81,8 @@ function reducer(state, [op, arg]) {
       return { ...state, solfege: arg };
     case 'setCarry':
       return { ...state, carry: arg };
+    case 'selectPattern':
+      return { ...state, selPat: arg };
   }
   return state;
 }

@@ -1,22 +1,35 @@
 .info {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  .info-item {
+    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px 20px;
+    opacity: 0.4;
+    &.selected {
+      opacity: 1;
+    }
+  }
   .kind {
     border-radius: 4px;
-    opacity: 0.4;
+    opacity: 0.7;
     font-size: 70%;
     padding: 2px 8px;
     display: inline-block;
     text-transform: uppercase;
     color: white;
-  }
-  .kind-scale {
-    background-color: #1f7240;
-  }
-  .kind-chord {
-    background-color: #5a1f72;
-  }
-  .kind-interval {
-    background-color: #1f3872;
+    &--scale {
+      background-color: #1f7240;
+    }
+    &--chord {
+      background-color: #5a1f72;
+    }
+    &--interval {
+      background-color: #1f3872;
+    }
   }
   p {
     margin: 0;

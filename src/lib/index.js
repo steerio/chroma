@@ -1,5 +1,5 @@
 export function numSort(a) {
-  return a.sort((i, j) => i-j);
+  return [...a].sort((i, j) => i-j);
 }
 
 function arrEq(a, b, len) {

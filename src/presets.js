@@ -1,4 +1,4 @@
-import { Interval, CustomScale, DiatonicScale, Triad } from './patterns';
+import { Interval, CustomScale, DiatonicScale, Chord } from './patterns';
 
 export const diatonicScales = DiatonicScale.names.map((m, i) => [ i, m]);
 diatonicScales.splice(5, 1);
@@ -38,7 +38,7 @@ export const importantScales = [
 export const matchers = [
   Interval,
   DiatonicScale,
-  Triad,
   ...importantScales.map(i => i.scale),
-  new CustomScale('Lydian dominant', 5, [ 0, 2, 4, 6, 7, 9, 10 ])
+  new CustomScale('Lydian dominant', 5, [ 0, 2, 4, 6, 7, 9, 10 ]),
+  Chord,
 ];

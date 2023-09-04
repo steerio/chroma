@@ -14,21 +14,13 @@ import "./App.scss";
 export const App = () => {
   const [ state, dispatch ] = useAppReducer();
 
-  const { sel, root } = state;
+  const { sel, selPat, root } = state;
   const patterns = useMemo(
-    () => {
-      if (sel) {
-        for (const m of matchers) {
-          const res = m.match(sel, root);
-          if (res) return res.slice ? res : [res];
-        }
-      }
-      return null;
-    },
+    () => sel.length ? matchers.flatMap(m => m.match(sel, root)).filter(i => i) : null,
     [ sel, root ]
   );
 
-  const pattern = patterns?.[0];
+  const pattern = patterns?.[selPat];
 
   return (
     <div>
@@ -49,7 +41,11 @@ export const App = () => {
           dispatch={dispatch}
         />
       </div>
-      <Info patterns={patterns} />
+      <Info
+        patterns={patterns}
+        sel={selPat}
+        dispatch={dispatch}
+      />
     </div>
   );
 };
