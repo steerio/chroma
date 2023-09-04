@@ -45,7 +45,6 @@ export class DiatonicScale extends Scale {
   }
 
   isOppositeC(root) {
-    console.log("Rel. major root", this.relativeMajorRoot(root));
     return this.relativeMajorRoot(root) == 6;
   }
 

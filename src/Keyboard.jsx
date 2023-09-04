@@ -45,7 +45,7 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
 
       let mainClass, key, content;
       if (!note.pop) {
-        mainClass = 'white';
+        mainClass = note == 'E#' ? 'grey' : 'white';
         key = `${note}-${oct}`;
         content = note;
       } else {
