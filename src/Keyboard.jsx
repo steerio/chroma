@@ -38,7 +38,8 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
             selected = sel.indexOf(idx) > -1,
             htmlClasses = {
               selected,
-              scale: hasRoot && idx >= root && idx < root+12
+              scale: hasRoot && idx >= root && idx < root+12,
+              'scale--last': idx == root+11
             };
 
       let sol =
