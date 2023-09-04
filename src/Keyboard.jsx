@@ -1,9 +1,8 @@
 import { h, Fragment } from 'preact';
 
 import { modulo, hasDupes } from './lib';
-import { chromatic, solmization } from './data';
+import { chromatic, chromaticFSharp, solmization } from './data';
 import classes from 'classnames';
-
 import "./Keyboard.scss";
 
 // Figuring out the accidentals {{{
@@ -24,14 +23,20 @@ function selectAccidentals(absSel) {
 
 export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, dispatch }) => {
   const keys = [], hasRoot = root !== null;
-  let cidx;
-  let gidx = -12; // TODO
+  let gcidx, gidx = -12; // TODO
+
+  let accidentals = selectAccidentals(sel, root),
+      chroma = chromatic;
+  if (hasRoot && pattern?.isOppositeC && pattern.isOppositeC(root)) {
+    chroma = chromaticFSharp,
+    accidentals = 'sharps';
+  }
 
   for (let oct=1; oct<=octaves; oct++) {
-    cidx = 0;
-    for (let note of chromatic) {
+    gcidx = 0;
+    for (let note of chroma) {
       const idx = gidx++,
-            chroma = cidx++,
+            cidx = gcidx++,
             selected = sel.indexOf(idx) > -1,
             htmlClasses = {
               selected,
@@ -39,7 +44,7 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
             };
 
       let mainClass, key, content;
-      if (note.length == 1) {
+      if (!note.pop) {
         mainClass = 'white';
         key = `${note}-${oct}`;
         content = note;
@@ -53,10 +58,10 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
       }
 
       let sol =
-        solfege && hasRoot && selected && pattern?.diatonicRoot !== undefined &&
-        solmization[modulo(pattern.diatonicRoot - root + chroma, 12)];
+        solfege && hasRoot && selected && pattern?.diatonic &&
+        solmization[modulo(pattern.diatonicRoot - root + cidx, 12)];
 
-      if (sol.pop) sol = sol.map(i => <span>{ i }</span>);
+      if (sol?.pop) sol = sol.map(i => <span>{ i }</span>);
 
       keys.push(
         <li
@@ -74,5 +79,5 @@ export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, di
     }
   }
 
-  return <ul class={classes("keyboard", selectAccidentals(sel, root))}>{ keys }</ul>;
+  return <ul class={classes("keyboard", accidentals)}>{ keys }</ul>;
 };

@@ -24,6 +24,6 @@ export class Pattern {
   }
 
   get diatonic() {
-    return false;
+    return this.diatonicRoot !== undefined;
   }
 }

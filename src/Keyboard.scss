@@ -3,7 +3,7 @@ ul.keyboard {
   list-style: none;
   margin: 20px 0;
   padding: 0;
-  &.flats .selected .sharp, &.sharps .selected .flat {
+  &.flats .sharp, &.sharps .flat {
     display: none;
   }
   li {

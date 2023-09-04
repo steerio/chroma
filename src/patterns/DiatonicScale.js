@@ -1,5 +1,5 @@
 import { Scale } from "./Scale";
-import { arrEqual } from '../lib';
+import { modulo, arrEqual } from '../lib';
 
 const major = [ 0, 2, 4, 5, 7, 9, 11 ];
 
@@ -38,6 +38,15 @@ export class DiatonicScale extends Scale {
     for (let i=0; i<7; i++)
       if (arrEqual(notes, scales[i])) return new DiatonicScale(i);
     return false;
+  }
+
+  relativeMajorRoot(root) {
+    return modulo(root - this.diatonicRoot, 12);
+  }
+
+  isOppositeC(root) {
+    console.log("Rel. major root", this.relativeMajorRoot(root));
+    return this.relativeMajorRoot(root) == 6;
   }
 
   generate(root) {
