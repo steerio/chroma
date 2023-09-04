@@ -2,7 +2,7 @@ import { Pattern } from "./Pattern";
 import { modulo } from '../lib';
 import { detect } from '@tonaljs/chord-detect';
 import { get } from '@tonaljs/chord';
-import { simplify } from '@tonaljs/note';
+import { enharmonic, simplify } from '@tonaljs/note';
 import { basicChromatic } from '../data';
 
 function toLabel(i) {
@@ -19,6 +19,11 @@ function toName(i) {
   return i.replace('M', '').replace('ma7', 'maj7');
 }
 
+function normalize(note) {
+  const s = simplify(note);
+  return s[1] == 'b' ? enharmonic(s) : s;
+}
+
 export class Chord extends Pattern {
   kind = 'chord';
 
@@ -33,7 +38,7 @@ export class Chord extends Pattern {
     return detect(notes).map(i => {
       const n = i.replace(/\/[CDEFGAB][^/]*$/, '')
       const raw = get(n),
-            chNotes = raw.notes.map(simplify),
+            chNotes = raw.notes.map(normalize),
             chord = new Chord(toName(raw.symbol));
 
       chord.labels = notes.map(n => {
