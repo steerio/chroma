@@ -22,13 +22,11 @@ function selectAccidentals(absSel) {
 // }}}
 
 export const Keyboard = ({ state: { sel, root, solfege }, pattern, octaves=3, dispatch }) => {
-  const keys = [], hasRoot = root !== null;
+  const keys = [], hasRoot = root !== null,
+        accidentals = selectAccidentals(sel, root),
+        chroma = (hasRoot && pattern?.isOppositeC?.(root)) ? chromaticOpposite : chromatic;
+        
   let gcidx, gidx = -12; // TODO
-
-  let accidentals = selectAccidentals(sel, root),
-      chroma = chromatic;
-  if (hasRoot && pattern?.isOppositeC && pattern.isOppositeC(root))
-    chroma = chromaticOpposite;
 
   for (let oct=1; oct<=octaves; oct++) {
     gcidx = 0;
