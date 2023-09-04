@@ -21,5 +21,8 @@
   p {
     margin: 0;
     font-size: 2em;
+    &.subtitle {
+      font-size: inherit;
+    }
   }
 }

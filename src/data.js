@@ -36,3 +36,5 @@ export const chromaticOpposite = [
 
 // Bloody roots
 export const roots = [0,1,2,3,4,5,6,-5,-4,-3,-2,-1];
+
+export const ordinals = [null, "1st", "2nd", "3rd"];

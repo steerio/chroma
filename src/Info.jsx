@@ -10,6 +10,7 @@ export const Info = ({ patterns }) => {
       <div class="info">
         <div class={classes('kind', `kind-${pattern.kind}`)}>{ pattern.label }</div>
         <p>{ pattern.name }</p>
+        { pattern.subtitle && <p class="subtitle">{ pattern.subtitle }</p> }
       </div>
     );
   }
