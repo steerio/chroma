@@ -7,7 +7,8 @@ import { basicChromatic, inversions } from '../data';
 
 function toLabel(i) {
   if (i == '1P') return 'R';
-  const [ step, q ] = i;
+  const step = i.slice(0, -1),
+        q = i.slice(-1);
   switch (q) {
     case 'A': return `△${step}`;
     case 'd': return `°${step}`;
