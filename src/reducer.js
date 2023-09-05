@@ -72,7 +72,7 @@ function reducer(state, [op, arg]) {
       if (root === null) return state;
       return setRootFollow(state, shiftRoot(root, arg));
     case 'clear':
-      return { ...state, sel: [], follow: false };
+      return { ...state, sel: [], follow: false, pattern: 0 };
     case 'setRoot':
       return { ...state, root: arg };
     case 'setRootFollow':
