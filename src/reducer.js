@@ -34,7 +34,7 @@ function reducer(state, [op, arg]) {
   switch (op) {
     case 'add':
       pos = sel.findIndex(i => i >= arg);
-      if (pos == -1) return { ...state, sel: [ ...sel, arg] };
+      if (pos == -1) return { ...state, sel: [ ...sel, arg], selPat: 0 };
       if (sel[pos] == arg) return state;
       return {
         ...state,
@@ -72,7 +72,7 @@ function reducer(state, [op, arg]) {
       if (root === null) return state;
       return setRootFollow(state, shiftRoot(root, arg));
     case 'clear':
-      return { ...state, sel: [], follow: false, pattern: 0 };
+      return { ...state, sel: [], follow: false, selPat: 0 };
     case 'setRoot':
       return { ...state, root: arg };
     case 'setRootFollow':
