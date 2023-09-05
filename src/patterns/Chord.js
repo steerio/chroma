@@ -33,6 +33,8 @@ function normalize(note) {
   return s[1] == 'b' ? enharmonic(s) : s;
 }
 
+const omitted = 'P5 is omitted';
+
 export class Chord extends Pattern {
   kind = 'chord';
 
@@ -57,11 +59,9 @@ export class Chord extends Pattern {
 
       console.log(raw);
 
-      if (raw.symbol.indexOf('no5') > -1) {
-        chord.more = 'P5 is omitted';
-      } else {
-        chord.more = inversions[chNotes.indexOf(notes[0])];
-      }
+      chord.more = inversions[chNotes.indexOf(notes[0])];
+      if (raw.symbol.indexOf('no5') > -1)
+        chord.more = chord.more ? `${chord.more}, ${omitted}` : omitted;
 
       return chord;
     });
