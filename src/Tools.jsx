@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { chromatic, roots } from './data';
 import { diatonicScales, importantScales } from './presets';
 import { Scale, DiatonicScale } from './patterns';
-import { playSeries, playSeriesAddOct, stop } from './play';
+import { playSeries, playSeriesAddOct, playAll, stop } from './play';
 
 import "./Tools.scss";
 
@@ -115,6 +115,7 @@ export const Tools = ({ state: { root, sel, solfege, carry, follow }, pattern, d
       <div class="buttons">
         <button disabled={!sel.length} type="button" onClick={() => playSeries(sel)}>Play</button>
         <button disabled={!sel.length} type="button" onClick={() => playSeriesAddOct(sel)}>Play +1</button>
+        <button disabled={!sel.length || sel.length > 5} type="button" onClick={() => playAll(sel)}>Play chord</button>
         <button type="button" onClick={() => stop()}>Stop</button>
       </div>
     </div>

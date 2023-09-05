@@ -23,6 +23,10 @@ export function playOne(n) {
   setTimeout(() => o.disconnect(), 1000);
 }
 
+export function playAll(ns) {
+  playSeries(ns, 20);
+}
+
 export function stop() {
   if (timeout) {
     clearTimeout(timeout);
@@ -30,10 +34,10 @@ export function stop() {
   }
 }
 
-export function playSeries(ns) {
+export function playSeries(ns, delay=200) {
   const [ n, ...rest ] = ns;
   playOne(n);
-  if (rest.length) timeout = setTimeout(() => playSeries(rest), 200);
+  if (rest.length) timeout = setTimeout(() => playSeries(rest, delay), delay);
 }
 
 export function playSeriesAddOct(ns) {
