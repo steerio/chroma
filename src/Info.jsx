@@ -14,7 +14,7 @@ export const Info = ({ patterns, sel, dispatch }) => {
           >
             <div class={classes('kind', `kind--${pattern.kind}`)}>{ pattern.label }</div>
             <p>{ pattern.name }</p>
-            { pattern.subtitle && <p class="subtitle">{ pattern.subtitle }</p> }
+            { pattern.more && <p class="more">{ pattern.more }</p> }
           </div>
         ))}
       </div>

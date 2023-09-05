@@ -50,5 +50,7 @@ export const roots = [0,1,2,3,4,5,6,-5,-4,-3,-2,-1];
 export const inversions = [
   'Root position',
   "1st inversion",
-  "2nd inversion"
+  "2nd inversion",
+  "3rd inversion",
+  "4th inversion"
 ];

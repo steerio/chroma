@@ -34,7 +34,8 @@
   p {
     margin: 0;
     font-size: 2em;
-    &.subtitle {
+    line-height: 1.4em;
+    &.more {
       font-size: inherit;
     }
   }
