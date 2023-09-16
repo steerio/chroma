@@ -40,5 +40,5 @@ export const matchers = [
   DiatonicScale,
   ...importantScales.map(i => i.scale),
   new CustomScale('Lydian dominant', 5, [ 0, 2, 4, 6, 7, 9, 10 ]),
-  Chord,
+  Chord
 ];

@@ -57,8 +57,6 @@ export class Chord extends Pattern {
         return idx > -1 ? toLabel(raw.intervals[idx]) : null;
       });
 
-      console.log(raw);
-
       chord.more = inversions[chNotes.indexOf(notes[0])];
       if (raw.symbol.indexOf('no5') > -1)
         chord.more = chord.more ? `${chord.more}, ${omitted}` : omitted;

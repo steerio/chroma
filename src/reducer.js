@@ -32,6 +32,16 @@ function reducer(state, [op, arg]) {
   const { sel } = state;
   let pos;
   switch (op) {
+    case 'toggle':
+      pos = sel.indexOf(arg);
+      if (pos != -1) {
+        return {
+          ...state,
+          sel: [ ...sel.slice(0, pos), ...sel.slice(pos+1) ],
+          follow: false,
+          selPat: 0
+        };
+      }
     case 'add':
       pos = sel.findIndex(i => i >= arg);
       if (pos == -1) return { ...state, sel: [ ...sel, arg], selPat: 0 };
@@ -43,7 +53,7 @@ function reducer(state, [op, arg]) {
         selPat: 0
       };
     case 'drop':
-      pos = sel.findIndex(i => i == arg);
+      pos = sel.indexOf(arg);
       if (pos == -1) return state;
       return {
         ...state,

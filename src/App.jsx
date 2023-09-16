@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useMemo } from 'preact/hooks';
+import { useMemo, useEffect } from 'preact/hooks';
 
 import { Keyboard } from './Keyboard';
 import { Info } from './Info';
@@ -7,12 +7,16 @@ import { Presets, Tools } from './Tools';
 
 import { useAppReducer } from './reducer';
 import { matchers } from './presets';
-import { arrEqual, findPattern } from './lib';
+import { setupMidi } from './midi';
 
 import "./App.scss";
 
+const ADJ_OCTAVES = 1;
+
 export const App = () => {
   const [ state, dispatch ] = useAppReducer();
+
+  useEffect(() => setupMidi(dispatch, ADJ_OCTAVES), [dispatch]);
 
   const { sel, selPat, root } = state;
   const patterns = useMemo(
@@ -37,6 +41,7 @@ export const App = () => {
       <div class="octaves">
         <Keyboard
           state={state}
+          adjOctaves={ADJ_OCTAVES}
           pattern={pattern}
           dispatch={dispatch}
         />
