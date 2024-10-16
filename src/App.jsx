@@ -7,7 +7,7 @@ import { Presets, Tools } from './Tools';
 
 import { useAppReducer } from './reducer';
 import { matchers } from './presets';
-import { setupMidi } from './midi';
+import { setupMIDI } from './midi';
 
 import "./App.scss";
 
@@ -16,7 +16,7 @@ const ADJ_OCTAVES = 1;
 export const App = () => {
   const [ state, dispatch ] = useAppReducer();
 
-  useEffect(() => setupMidi(dispatch, ADJ_OCTAVES), [dispatch]);
+  useEffect(() => setupMIDI(dispatch, ADJ_OCTAVES), [dispatch]);
 
   const { sel, selPat, root } = state;
   const patterns = useMemo(
